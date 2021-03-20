@@ -1,6 +1,7 @@
 ﻿using FhNotifications.Properties;
 using FreelancehuntApiClient;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,7 +31,7 @@ namespace FhNotifications
 
                 if (dialogResult != DialogResult.OK)
                 {
-                    Application.Exit();
+                    Environment.Exit(Environment.ExitCode);
                     return;
                 }
             }
@@ -204,7 +205,7 @@ namespace FhNotifications
             else if (e.ClickedItem == ExitNotifyIconContextMenuItem)
             {
                 AppNotifyIcon.Visible = false;
-                Application.Exit();
+                Environment.Exit(Environment.ExitCode);
             }
         }
 
@@ -220,6 +221,18 @@ namespace FhNotifications
                 await fhCient.MarkFeedAsRead();
             }
             catch (Exception exception) { } // ignore
+        }
+
+        private void YoutubeLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                Process.Start("https://www.youtube.com/c/kuzcode");
+        }
+
+        private void TelegramLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                Process.Start("https://t.me/kuzcodech");
         }
     }
 }
