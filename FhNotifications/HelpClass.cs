@@ -13,20 +13,20 @@ namespace FhNotifications
     {
         public static void SetLinksInLinkLabelFromHtmlTags(LinkLabel linkLabel)
         {
-            var linkTagMatches = Regex.Matches(linkLabel.Text, "<a href=\"(.*)\">(.*)</a>");
+            var linkTagMatches = Regex.Matches(linkLabel.Text, "<a(.*)>(.*)</a>", RegexOptions.Singleline);
 
             foreach (Match linkTagMatch in linkTagMatches)
             {
                 var document = new HtmlAgilityPack.HtmlDocument();
                 document.LoadHtml(linkTagMatch.Value);
 
-                var linkTag = document.DocumentNode.ChildNodes.FindFirst("a");
-                var link = linkTag.Attributes["href"].Value;
-                var linkText = linkTag.InnerText;
+                var linkTag     = document.DocumentNode.ChildNodes.FindFirst("a");
+                var link        = linkTag.Attributes["href"].Value;
+                var linkText    = linkTag.InnerText;
 
-                linkLabel.Text = linkLabel.Text.Remove(linkTagMatch.Index, linkTagMatch.Value.Length);
-                linkLabel.Text = linkLabel.Text.Insert(linkTagMatch.Index, linkText);
-                linkLabel.Links.Add(new LinkLabel.Link(linkTagMatch.Index, link.Length, link));
+                var regex       = new Regex(Regex.Escape(linkTagMatch.Value));
+                linkLabel.Text  = regex.Replace(linkLabel.Text, linkText, 1);
+                linkLabel.Links.Add(new LinkLabel.Link(linkTagMatch.Index, linkText.Length, link));
             }
         }
 
