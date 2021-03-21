@@ -69,17 +69,5 @@ namespace FhNotifications.Properties {
                 this["MessageShowingSeconds"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LaunchOnSystemStart {
-            get {
-                return ((bool)(this["LaunchOnSystemStart"]));
-            }
-            set {
-                this["LaunchOnSystemStart"] = value;
-            }
-        }
     }
 }
