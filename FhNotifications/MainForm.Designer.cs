@@ -40,10 +40,10 @@ namespace FhNotifications
             this.SettingsNotifyIconContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitNotifyIconContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogoPanel = new System.Windows.Forms.Panel();
+            this.YoutubeLink = new System.Windows.Forms.LinkLabel();
             this.TelegramLink = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.LogoPicture = new System.Windows.Forms.PictureBox();
-            this.YoutubeLink = new System.Windows.Forms.LinkLabel();
             this.FeedPanel.SuspendLayout();
             this.NotifyIconContextMenu.SuspendLayout();
             this.LogoPanel.SuspendLayout();
@@ -57,6 +57,9 @@ namespace FhNotifications
             // 
             // FeedPanel
             // 
+            this.FeedPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.FeedPanel.AutoScroll = true;
             this.FeedPanel.Controls.Add(this.label1);
             this.FeedPanel.Controls.Add(this.RetryLoadFeedButton);
@@ -133,6 +136,20 @@ namespace FhNotifications
             this.LogoPanel.Size = new System.Drawing.Size(842, 102);
             this.LogoPanel.TabIndex = 1;
             // 
+            // YoutubeLink
+            // 
+            this.YoutubeLink.AutoSize = true;
+            this.YoutubeLink.Font = new System.Drawing.Font("Montserrat", 12F);
+            this.YoutubeLink.LinkArea = new System.Windows.Forms.LinkArea(12, 33);
+            this.YoutubeLink.Location = new System.Drawing.Point(11, 39);
+            this.YoutubeLink.Name = "YoutubeLink";
+            this.YoutubeLink.Size = new System.Drawing.Size(521, 30);
+            this.YoutubeLink.TabIndex = 3;
+            this.YoutubeLink.TabStop = true;
+            this.YoutubeLink.Text = "Ютуб-канал: https://www.youtube.com/c/kuzcode";
+            this.YoutubeLink.UseCompatibleTextRendering = true;
+            this.YoutubeLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.YoutubeLink_LinkClicked);
+            // 
             // TelegramLink
             // 
             this.TelegramLink.AutoSize = true;
@@ -171,20 +188,6 @@ namespace FhNotifications
             this.LogoPicture.TabIndex = 0;
             this.LogoPicture.TabStop = false;
             // 
-            // YoutubeLink
-            // 
-            this.YoutubeLink.AutoSize = true;
-            this.YoutubeLink.Font = new System.Drawing.Font("Montserrat", 12F);
-            this.YoutubeLink.LinkArea = new System.Windows.Forms.LinkArea(12, 33);
-            this.YoutubeLink.Location = new System.Drawing.Point(11, 39);
-            this.YoutubeLink.Name = "YoutubeLink";
-            this.YoutubeLink.Size = new System.Drawing.Size(521, 30);
-            this.YoutubeLink.TabIndex = 3;
-            this.YoutubeLink.TabStop = true;
-            this.YoutubeLink.Text = "Ютуб-канал: https://www.youtube.com/c/kuzcode";
-            this.YoutubeLink.UseCompatibleTextRendering = true;
-            this.YoutubeLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.YoutubeLink_LinkClicked);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -193,7 +196,7 @@ namespace FhNotifications
             this.Controls.Add(this.LogoPanel);
             this.Controls.Add(this.FeedPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(860, 500);
+            this.MinimumSize = new System.Drawing.Size(860, 586);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Уведомления";

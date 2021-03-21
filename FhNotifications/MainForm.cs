@@ -16,7 +16,7 @@ namespace FhNotifications
 
         public MainForm()
         {
-            //Settings.Default.Reset();
+            Settings.Default.Reset();
             InitializeComponent();
 
             Opacity = 0;
