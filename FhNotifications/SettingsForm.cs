@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FhNotifications.Properties;
@@ -14,7 +15,7 @@ namespace FhNotifications
             InitializeComponent();
 
             ApiTokenText.Text = Settings.Default.ApiToken;
-            LaunchOnSystemStartCheckBox.Checked = Settings.Default.LaunchOnSystemStart;
+            LaunchOnSystemStartCheckBox.Checked = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false).GetValueNames().Contains(ProductName);
         }
 
         private async Task<bool> IsApiTokenCorrect(string token)
@@ -43,7 +44,7 @@ namespace FhNotifications
         private async Task<DialogResult> SaveChanges()
         {
             if (!string.IsNullOrWhiteSpace(Settings.Default.ApiToken) && ApiTokenText.Text == Settings.Default.ApiToken &&
-                LaunchOnSystemStartCheckBox.Checked == Settings.Default.LaunchOnSystemStart)
+                LaunchOnSystemStartCheckBox.Checked == Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false).GetValueNames().Contains(ProductName))
             {
                 return DialogResult.None;
             }
@@ -68,7 +69,7 @@ namespace FhNotifications
 
             Settings.Default.ApiToken = ApiTokenText.Text;
 
-            if (Settings.Default.LaunchOnSystemStart != LaunchOnSystemStartCheckBox.Checked)
+            if (LaunchOnSystemStartCheckBox.Checked != Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false).GetValueNames().Contains(ProductName))
             {
                 if (LaunchOnSystemStartCheckBox.Checked)
                 {
@@ -80,8 +81,6 @@ namespace FhNotifications
                     RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                     key.DeleteValue(ProductName, false);
                 }
-
-                Settings.Default.LaunchOnSystemStart = LaunchOnSystemStartCheckBox.Checked;
             }
 
             Settings.Default.Save();
@@ -108,7 +107,7 @@ namespace FhNotifications
         private async void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (ApiTokenText.Text != Settings.Default.ApiToken ||
-                LaunchOnSystemStartCheckBox.Checked != Settings.Default.LaunchOnSystemStart)
+                LaunchOnSystemStartCheckBox.Checked != Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false).GetValueNames().Contains(ProductName))
             {
                 var dialogResult = MessageBox.Show("Вы изменили некоторые поля. Сохранить изменения?", "Вы не сохранили данные", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
