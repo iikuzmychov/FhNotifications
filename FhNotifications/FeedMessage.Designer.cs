@@ -46,6 +46,8 @@ namespace FhNotifications
             this.MessageText.TabIndex = 0;
             this.MessageText.Text = "Текст сообщения";
             this.MessageText.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.MessageText_LinkClicked);
+            this.MessageText.MouseEnter += new System.EventHandler(this.FeedMessage_MouseEnter);
+            this.MessageText.MouseLeave += new System.EventHandler(this.FeedMessage_MouseLeave);
             // 
             // TimeText
             // 
@@ -59,6 +61,8 @@ namespace FhNotifications
             this.TimeText.TabIndex = 1;
             this.TimeText.Text = "15:30";
             this.TimeText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TimeText.MouseEnter += new System.EventHandler(this.FeedMessage_MouseEnter);
+            this.TimeText.MouseLeave += new System.EventHandler(this.FeedMessage_MouseLeave);
             // 
             // FeedMessage
             // 
@@ -72,6 +76,8 @@ namespace FhNotifications
             this.MinimumSize = new System.Drawing.Size(800, 2);
             this.Name = "FeedMessage";
             this.Size = new System.Drawing.Size(798, 36);
+            this.MouseEnter += new System.EventHandler(this.FeedMessage_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.FeedMessage_MouseLeave);
             this.Resize += new System.EventHandler(this.FeedMessage_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
