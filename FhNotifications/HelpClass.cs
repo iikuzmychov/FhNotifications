@@ -13,7 +13,7 @@ namespace FhNotifications
     {
         public static void SetLinksInLinkLabelFromHtmlTags(LinkLabel linkLabel)
         {
-            var linkTagMatches = Regex.Matches(linkLabel.Text, "<a(.*)>(.*)</a>", RegexOptions.Singleline);
+            var linkTagMatches = Regex.Matches(linkLabel.Text, @"<a[^>]*>[^<]*<\/a>", RegexOptions.Singleline);
 
             foreach (Match linkTagMatch in linkTagMatches)
             {
@@ -21,12 +21,17 @@ namespace FhNotifications
                 document.LoadHtml(linkTagMatch.Value);
 
                 var linkTag     = document.DocumentNode.ChildNodes.FindFirst("a");
-                var link        = linkTag.Attributes["href"].Value;
+                var link        = linkTag.Attributes["href"]?.Value;
                 var linkText    = linkTag.InnerText;
 
-                var regex       = new Regex(Regex.Escape(linkTagMatch.Value));
-                linkLabel.Text  = regex.Replace(linkLabel.Text, linkText, 1);
-                linkLabel.Links.Add(new LinkLabel.Link(linkTagMatch.Index, linkText.Length, link));
+                var currentLinkTagRregex    = new Regex(Regex.Escape(linkTagMatch.Value));
+                var startPosition           = currentLinkTagRregex.Match(linkLabel.Text).Index;
+                linkLabel.Text              = currentLinkTagRregex.Replace(linkLabel.Text, linkText, 1);
+
+                if (link is null)
+                    continue;
+
+                linkLabel.Links.Add(new LinkLabel.Link(startPosition, linkText.Length, link));
             }
         }
 
