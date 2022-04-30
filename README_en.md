@@ -1,4 +1,4 @@
-[EN](README_en.md) | [RU](README.md)
+EN | [RU](README.md)
 
 # FhNotifications
 FhNotifications is a third-party open-source program for receiving notifications from https://freelancehunt.com.
